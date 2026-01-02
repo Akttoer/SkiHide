@@ -1,0 +1,7 @@
+requests
+keyboard
+pynput
+infi.systray
+pycaw
+comtypes
+pywin32
