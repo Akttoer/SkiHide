@@ -1,0 +1,67 @@
+name: Build (Windows)
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip wheel setuptools
+          pip install pyinstaller
+          # 你的 main.py / spec 用到的依赖（没有 requirements.txt 的情况下用这份）
+          pip install requests keyboard pynput infi.systray pycaw comtypes pywin32
+
+      - name: Build with PyInstaller spec
+        shell: pwsh
+        run: |
+          pyinstaller --clean --noconfirm optimized.spec
+          if (!(Test-Path "dist")) { throw "dist folder not found" }
+          Get-ChildItem -Recurse dist
+
+      - name: Prepare artifact (zip)
+        shell: pwsh
+        run: |
+          $exe = "dist\main.exe"
+          if (!(Test-Path $exe)) { throw "Expected $exe not found. Check spec name='main'." }
+
+          New-Item -ItemType Directory -Force -Path out | Out-Null
+          Copy-Item $exe -Destination "out\SkiHide.exe" -Force
+
+          # 把 exe 打成 zip（方便下载）
+          Compress-Archive -Path "out\SkiHide.exe" -DestinationPath "out\SkiHide-windows.zip" -Force
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SkiHide-windows
+          path: |
+            out/SkiHide.exe
+            out/SkiHide-windows.zip
+
+      - name: Create GitHub Release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            out/SkiHide.exe
+            out/SkiHide-windows.zip
