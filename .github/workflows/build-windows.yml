@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: "pip"
 
       - name: Install dependencies
         shell: pwsh
@@ -46,8 +45,6 @@ jobs:
 
           New-Item -ItemType Directory -Force -Path out | Out-Null
           Copy-Item $exe -Destination "out\SkiHide.exe" -Force
-
-          # 把 exe 打成 zip（方便下载）
           Compress-Archive -Path "out\SkiHide.exe" -DestinationPath "out\SkiHide-windows.zip" -Force
 
       - name: Upload artifact
