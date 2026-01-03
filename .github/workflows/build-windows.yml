@@ -51,7 +51,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           # 你的项目运行/打包依赖（含托盘 pystray）
-          pip install pyinstaller pillow requests pystray pywin32
+          pip install pyinstaller pillow requests pystray pywin32 pycaw
 
       - name: Build with PyInstaller spec
         shell: pwsh
