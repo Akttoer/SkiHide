@@ -5,3 +5,4 @@ pycaw
 comtypes
 pywin32
 pystray
+PIL
