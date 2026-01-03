@@ -6,7 +6,7 @@ on:
     types: [published]
 
   # （可选）你想手动点 Run workflow 调试就保留，不想就删掉
-  # workflow_dispatch:
+  workflow_dispatch:
 
 permissions:
   contents: write
