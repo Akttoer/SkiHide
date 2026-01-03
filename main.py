@@ -8,9 +8,7 @@ import requests
 import json
 import time
 import webbrowser
-from ctypes import cast, POINTER
-from comtypes import CLSCTX_ALL
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+from pycaw.pycaw import AudioUtilities
 
 # 定义Windows API常量
 WM_APPCOMMAND = 0x319
