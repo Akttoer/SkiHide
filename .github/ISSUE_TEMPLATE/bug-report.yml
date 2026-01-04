@@ -2,7 +2,7 @@ name: 🐞 Bug 反馈
 description: 提交一个 SkiHide 的 Bug 报告
 title: "[Bug] "
 labels:
-  - bug
+  - BUG
 
 body:
   - type: checkboxes
