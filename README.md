@@ -1,4 +1,4 @@
-# 🏂 SkiHide
+# SkiHide
 
 <p align="center">
   <img src="https://free.picui.cn/free/2026/01/04/6959c7376c000.png" alt="SkiHide Logo" width="180">
