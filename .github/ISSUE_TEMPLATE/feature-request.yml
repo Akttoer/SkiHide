@@ -8,9 +8,6 @@ body:
   - type: checkboxes
     attributes:
       label: 提交前确认
-      description: |
-        以下为提交功能建议前的确认事项。
-        **仅第 1 项为强制勾选，其余为说明与约定。**
       options:
         - label: 我已在 Issues 页面 中搜索，确认该功能建议尚未被提交
         - label: 我确认只是全部选中而没有仔细确认就直接提交了这个 Issue，并且同意这个 Issue 可以直接被关闭
