@@ -1,0 +1,56 @@
+name: ✨ 功能建议
+description: 提出一个你希望 SkiHide 支持或改进的功能
+title: "[功能建议] "
+labels:
+  - enhancement
+
+body:
+  - type: checkboxes
+    attributes:
+      label: 提交前确认
+      description: |
+        以下为提交功能建议前的确认事项。
+        **仅第 1 项为强制勾选，其余为说明与约定。**
+      options:
+        - label: 我已在 Issues 页面 中搜索，确认该功能建议尚未被提交
+        - label: 我确认只是全部选中而没有仔细确认就直接提交了这个 Issue，并且同意这个 Issue 可以直接被关闭
+        - label: 我理解社区不保证该建议一定会被实现，也不对实现时间作出任何承诺
+        - label: 我理解催促、反复询问进度或施压行为，可能会导致该 Issue 被直接关闭
+
+  - type: textarea
+    attributes:
+      label: 功能描述
+      description: 请清晰描述你希望添加或改进的功能
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 使用场景
+      description: 这个功能在什么情况下会对你有帮助？解决了什么问题？
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 可行性设想（可选）
+      description: |
+        如果你有一些实现思路、参考软件或交互设想，可以写在这里
+        （不要求技术细节）
+      placeholder: |
+        例如：
+        - 类似某某软件的实现方式
+        - 在设置页面增加一个列表配置
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: 额外补充（可选）
+      description: 任何你认为有助于理解该建议的信息
+      placeholder: |
+        - 截图
+        - 使用频率
+        - 是否愿意参与测试
+    validations:
+      required: false
