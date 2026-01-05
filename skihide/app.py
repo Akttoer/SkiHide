@@ -32,8 +32,8 @@ class SkiHideApp:
     def __init__(self, root, is_debug: bool = False, start_silent: bool = False):
         self.root = root
         self.root.title("SkiHide")
-        self.current_version = "1.3.6"
-        self.current_build = 26001
+        self.current_version = "1.3.7"
+        self.current_build = 26002
         self.is_debug = is_debug
         self.start_silent = start_silent
 
