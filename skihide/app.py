@@ -260,7 +260,7 @@ class SkiHideApp:
             ttk.Label(frame, text="⚠️ 这些功能可能会影响系统稳定性，请谨慎使用。", wraplength=320).pack(anchor="w", pady=(0, 12))
 
             ttk.Button(frame, text="内存清理", command=self.confirm_and_clean_memory).pack(fill=tk.X, pady=5)
-            ttk.Button(frame, text="清理缓存（%TEMP%）", command=self.confirm_and_clean_temp).pack(fill=tk.X, pady=5)
+            ttk.Button(frame, text="清理缓存", command=self.confirm_and_clean_temp).pack(fill=tk.X, pady=5)
             ttk.Separator(frame).pack(fill=tk.X, pady=10)
             ttk.Button(frame, text="千万别点", command=self.danger_button_step1).pack(fill=tk.X, pady=5)
 
@@ -327,9 +327,9 @@ class SkiHideApp:
                     pass
                 messagebox.showinfo("继续", "你选择了继续……\n（其实什么都不会发生）")
 
-            ttk.Button(btn_frame, text="继续 ①", command=cont).pack(side=tk.LEFT, expand=True, fill=tk.X, padx=3)
-            ttk.Button(btn_frame, text="继续 ②", command=cont).pack(side=tk.LEFT, expand=True, fill=tk.X, padx=3)
-            ttk.Button(btn_frame, text="继续 ③", command=cont).pack(side=tk.LEFT, expand=True, fill=tk.X, padx=3)
+            ttk.Button(btn_frame, text="继续", command=cont).pack(side=tk.LEFT, expand=True, fill=tk.X, padx=3)
+            ttk.Button(btn_frame, text="继续", command=cont).pack(side=tk.LEFT, expand=True, fill=tk.X, padx=3)
+            ttk.Button(btn_frame, text="继续", command=cont).pack(side=tk.LEFT, expand=True, fill=tk.X, padx=3)
 
             win.protocol("WM_DELETE_WINDOW", lambda: None)
         except Exception:

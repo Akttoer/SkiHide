@@ -33,7 +33,7 @@ def clean_temp_folder(logger):
             except Exception:
                 failed += 1
 
-    logger.info(f"清理TEMP完成：文件 {deleted_files}，空目录 {deleted_dirs}，失败/跳过 {failed}")
+    logger.info(f"清理临时文件完成：文件 {deleted_files}，空目录 {deleted_dirs}，失败/跳过 {failed}")
     return deleted_files, deleted_dirs, failed
 
 def clean_memory_working_set(logger):
