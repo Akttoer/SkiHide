@@ -4,6 +4,32 @@ import psutil
 import sys
 import traceback
 
+# 内存清理白名单
+DEFAULT_MEMORY_CLEAN_SKIP = {
+    # 电压/功耗/调参
+    "uxtu.exe",
+    "throttlestop.exe",
+    "intelxtu.exe",
+    "xtucli.exe",
+    "ryzenmaster.exe",
+    "ryzenmasterdriver.exe",
+    "ryzenadj.exe",
+
+    # 显卡/硬件监控
+    "msiafterburner.exe",
+    "rtss.exe",
+    "rtsshooksloader.exe",
+    "hwinfo64.exe",
+    "hwinfo32.exe",
+    "aida64.exe",
+    "occt.exe",
+
+    # 常见系统关键（保守点）
+    "dwm.exe",
+    "explorer.exe",
+}
+
+
 def clean_temp_folder(logger):
     """Delete removable files under %TEMP%. Returns (deleted_files, deleted_dirs, failed)."""
     temp_dir = os.environ.get('TEMP') or os.environ.get('TMP')
@@ -36,7 +62,7 @@ def clean_temp_folder(logger):
     logger.info(f"清理临时文件完成：文件 {deleted_files}，空目录 {deleted_dirs}，失败/跳过 {failed}")
     return deleted_files, deleted_dirs, failed
 
-def clean_memory_working_set(logger):
+def clean_memory_working_set(logger, skip_process_names=None):
     """Try to shrink working sets for processes using EmptyWorkingSet (Windows only)."""
 
     if sys.platform != 'win32':
@@ -53,10 +79,25 @@ def clean_memory_working_set(logger):
     cleaned = 0
     failed = 0
 
+    # 合并默认跳过 + 用户自定义跳过
+    skip_set = set(DEFAULT_MEMORY_CLEAN_SKIP)
+    if skip_process_names:
+        skip_set |= {str(x).strip().lower() for x in skip_process_names if str(x).strip()}
+
     for proc in psutil.process_iter(['pid', 'name']):
         pid = proc.info.get('pid')
         if not pid or pid == 0:
             continue
+        name = (proc.info.get("name") or "").lower()
+
+        # 跳过白名单进程（如 UXTU / ThrottleStop 等）
+        if name in skip_set:
+            continue
+
+        # 跳过本程序自身
+        if int(pid) == os.getpid():
+            continue
+
         try:
             h = kernel32.OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_SET_QUOTA, False, int(pid))
             if not h:
