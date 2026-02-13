@@ -55,7 +55,7 @@ jobs:
       - name: Build with PyInstaller spec
         shell: pwsh
         run: |
-          python -m PyInstaller --clean --noconfirm optimized.spec
+          python -m PyInstaller --clean --noconfirm --add-data "lang\*.json;lang" optimized.spec
           if (!(Test-Path "dist")) { throw "dist folder not found" }
           Get-ChildItem -Recurse dist
 
